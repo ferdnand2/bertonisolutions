@@ -1,0 +1,9 @@
+For running this program you have some options:
+
+1) With one parameter: [output file]. In this case, the input file will be the given by the evaluator, called pokerdata.txt.
+
+2) Run with two parameters: [input file] [output file]. 
+
+3) In any other case, the help message will be show to you.
+
+Have fun using this application! :)
