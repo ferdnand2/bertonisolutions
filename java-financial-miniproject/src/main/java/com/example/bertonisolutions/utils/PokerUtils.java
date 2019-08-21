@@ -15,7 +15,13 @@ public class PokerUtils {
 	public final static String STRAIGHT_FLUSH = "8";
 	public final static String ROYAL_FLUSH = "9";
 
-	public static String valueHand(String[] cards) {
+	/**
+	 * Evaluates the cards from a player
+	 * 
+	 * @param cards cards to evaluate
+	 * @return Value of the hand
+	 */
+	public static String evaluateHand(String[] cards) {
 
 		orderCards(cards);
 		if (isFlushHand(cards) && isStraightHand(cards) && isMinCardTen(cards)) {
@@ -57,7 +63,13 @@ public class PokerUtils {
 				+ getStringValueFromCard(cards, 1) + getStringValueFromCard(cards, 0);
 	}
 
-	private static String getOnePair(String[] cardsPlayer) {
+	/**
+	 * Gets the value of the hand whether it is a pair
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return value of the hand
+	 */
+	static String getOnePair(String[] cardsPlayer) {
 		if (getValueFromCard(cardsPlayer, 0) == getValueFromCard(cardsPlayer, 1)) {
 			return getStringValueFromCard(cardsPlayer, 1)
 					+ getStringValueFromCard(cardsPlayer, 4)
@@ -85,7 +97,13 @@ public class PokerUtils {
 		return null;
 	}
 
-	private static String getTwoPairs(String[] cardsPlayer) {
+	/**
+	 * Gets the value of the hand whether it is 2 pairs
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return value of the hand
+	 */
+	static String getTwoPairs(String[] cardsPlayer) {
 		if (getValueFromCard(cardsPlayer, 0) == getValueFromCard(cardsPlayer, 1)
 				&& getValueFromCard(cardsPlayer, 2) == getValueFromCard(
 						cardsPlayer, 3)) {
@@ -110,7 +128,13 @@ public class PokerUtils {
 		return null;
 	}
 
-	private static String getThreeOfAKind(String[] cardsPlayer) {
+	/**
+	 * Gets the value of the hand whether it is three of a kind
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return value of the hand
+	 */
+	static String getThreeOfAKind(String[] cardsPlayer) {
 		if (getValueFromCard(cardsPlayer, 0) == getValueFromCard(cardsPlayer, 2)) {
 			return getStringValueFromCard(cardsPlayer, 2)
 					+ getStringValueFromCard(cardsPlayer, 4)
@@ -129,7 +153,14 @@ public class PokerUtils {
 		return null;
 	}
 
-	private static String getFullHouse(String[] cardsPlayer) {
+
+	/**
+	 * Gets the value of the hand whether it is a full house
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return value of the hand
+	 */
+	static String getFullHouse(String[] cardsPlayer) {
 		if (getValueFromCard(cardsPlayer, 2) == getValueFromCard(cardsPlayer, 4)
 				&& getValueFromCard(cardsPlayer, 0) == getValueFromCard(
 						cardsPlayer, 1)) {
@@ -145,7 +176,14 @@ public class PokerUtils {
 		return null;
 	}
 
-	private static String getFourOfAKind(String[] cardsPlayer) {
+
+	/**
+	 * Gets the value of the hand whether it is a four of a kind
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return value of the hand
+	 */
+	static String getFourOfAKind(String[] cardsPlayer) {
 		if (getValueFromCard(cardsPlayer, 1) == getValueFromCard(cardsPlayer, 4)) {
 			return getStringValueFromCard(cardsPlayer, 1)
 					+ getStringValueFromCard(cardsPlayer, 0);
@@ -157,23 +195,51 @@ public class PokerUtils {
 		return null;
 	}
 
-	private static int getMaxCard(String[] cardsPlayer) {
+
+	/**
+	 * Gets the max card in a ordered hand
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return value of the hand
+	 */
+	static int getMaxCard(String[] cardsPlayer) {
 		return getValueFromCard(cardsPlayer, 4);
 	}
 
-	private static boolean isMinCardTen(String[] cardsPlayer) {
+
+	/**
+	 * Returns true if the lower card is ten
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return value of the hand
+	 */
+	static boolean isMinCardTen(String[] cardsPlayer) {
 		return getValueFromCard(cardsPlayer, 0) == 10;
 	}
 
-	private static String orderCards(String[] cardsPlayer) {
+
+	/**
+	 * Orders the cards of the hand
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return Array ordered
+	 */
+	static String[]  orderCards(String[] cardsPlayer) {
 		Arrays.sort(
 				cardsPlayer,
 				(String a, String b) -> getValueFromCard(a) < getValueFromCard(b) ? -1
 						: getValueFromCard(a) == getValueFromCard(b) ? 0 : 1);
-		return null;
+		return cardsPlayer;
 	}
 
-	private static boolean isStraightHand(String[] cardsPlayer) {
+
+	/**
+	 * Return true if the hand is a straight
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return true  if the hand is a straight
+	 */
+	static boolean isStraightHand(String[] cardsPlayer) {
 		if (getValueFromCard(cardsPlayer, 0) == 14
 				&& getValueFromCard(cardsPlayer, 1) == 2
 				&& getValueFromCard(cardsPlayer, 2) == 3
@@ -191,12 +257,25 @@ public class PokerUtils {
 		return true;
 	}
 
-	private static int getValueFromCard(String[] cardsPlayer, int numberOfCard) {
+	/**
+	 * Returns the value of a card, given the position in the hand.
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @param numberOfCard Position of the card in the hand
+	 * @return Value of the card
+	 */
+	static int getValueFromCard(String[] cardsPlayer, int numberOfCard) {
 		return getValueFromCard(cardsPlayer[numberOfCard]);
 
 	}
 
-	private static int getValueFromCard(String cardsPlayer) {
+	/**
+	 * Returns the value of a card, given the position in the hand.
+	 * 
+	 * @param cardsPlayer cards of the player
+	 * @return Value of the card
+	 */
+	static int getValueFromCard(String cardsPlayer) {
 		char character = cardsPlayer.charAt(0);
 		if (character == 'A') {
 			return 14;
@@ -213,7 +292,15 @@ public class PokerUtils {
 
 	}
 	
-	private static String getStringValueFromCard(String[] cardsPlayer,  int numberOfCard) {
+	/**
+	 * Returns a value for the card, to make possible the comparation and the evaluation.
+	 * 
+	 * 
+	 * @param cardsPlayer  cards of the player
+	 * @param numberOfCard  Position of the card in the hand
+	 * @return Value in hexadecimal for the card
+	 */
+	static String getStringValueFromCard(String[] cardsPlayer,  int numberOfCard) {
 		char character = cardsPlayer[numberOfCard].charAt(0);
 		if (character == 'A') {
 			return "E";
@@ -230,7 +317,12 @@ public class PokerUtils {
 
 	}
 
-	private static boolean isFlushHand(String[] cardsPlayer) {
+	/**
+	 * Returns true if the hand is a flush
+	 * @param cardsPlayer Cards of the player
+	 * @return true if the hand is a flush
+	 */
+	static boolean isFlushHand(String[] cardsPlayer) {
 		char flushPropposed = cardsPlayer[0].charAt(1);
 		for (int i = 1; i < cardsPlayer.length; i++) {
 			if (cardsPlayer[i].charAt(1) != flushPropposed) {
